@@ -2,80 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        img.anim{
-        position:relative;
-        animation:mymove 4s;
-        }
-    #obr1 {animation-timing-function: easi-in-out;}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagonal Animation with Fade</title>
 
-    @keyframes mymove{
-    from{left:0px;}
-    to {left:500px;}
-    }
-
-
-    img.relative {
-      position: relative;
-      left: 30px;
-      border: 3px solid #73AD21;
-    }
-    .button{
-        position: fixed;
-        top: 50px;
-        right: 800px;
-    }
-    </style>
 </head>
-<body style="background-color:rgb(50, 50, 50); color:White" onresize="Fun()">
-<table>
-        <tr>
-            <td>Frog</td>
-            <td><button onclick="But()" position: fixed; top: 0px; right: 0px;>gif on/off</button></td>
-            <td>Frog</td>
-        </tr>
-        <tr>
-            <td>Frog</td>
-            <td><img id= "obr1" class="anim" src="/semestralka/TOHLE JE INPUT BRO.PNG"></td>
-            <td>Frog</td>
-        </tr>
-        <tr>
-            <td>Frog</td>
-            <td id="i">Frog</td>
-            <td id="frog8">Frog</td>
-        </tr>
-</table>
+<body>
+<div>
+    <p id="i"> I did this instead of learnin..</p>
+    <div style="position:relative;opacity:0;transition:transform 6s ease, opacity 0.5s ease;" id="box"><img id="obr1" src=""></div>
 
-<script>
-    const element = document.getElementById("obr1");
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    const element2 = document.getElementById("frog8")
-    element2.innerHTML= w.toString() +" "+ h.toString();
-    var gifs_online
+    <button style="position:fixed;top:0px;right:0px;" onclick="But()">gif on/off</button>
 
+    <script>
+    const box = document.getElementById('box');
+    const obr = document.getElementById('obr1');
+    const gifs = ["https://media.tenor.com/NFy4TVG3DUcAAAAd/among-us-sus.gif", "https://media.tenor.com/L4DgAFBQTuoAAAAj/twerking-thanos.gif", "https://static.wikia.nocookie.net/cb254027-3aa5-4163-89fa-70dd4af25281", "https://media.tenor.com/L4DgAFBQTuoAAAAj/twerking-thanos.gif", "https://media1.tenor.com/m/PRK5G1k8WT8AAAAd/morbius-milo.gif", "https://i.kym-cdn.com/photos/images/original/001/268/278/b8c.gif", "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3U3Z25oa2I2bXRwZTdld2o5ZTA0dGkxYm8yMmozMzJ5NHd5dHlvNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bC0caT4xYU8qQ/giphy.webp" , "https://c.tenor.com/JV1IF9I1NvMAAAAd/tenor.gif", "https://www.icegif.com/wp-content/uploads/nyan-cat-icegif-22.gif", "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.icegif.com%2Fwp-content%2Fuploads%2F2023%2F07%2Ficegif-767.gif"];
 
-function But()
-{
-    gifs_online = !gifs_online
-    if(gifs_online)
-        {document.getElementById("i").innerHTML="1";}
-    else
-        {document.getElementById("i").innerHTML="0";}
-}
+    let startX; let startY; let endX; let endY;
+    let gif_on = true;
 
-function Fun()
+    Do_thing();
+
+    function But()
     {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    element2.innerHTML = w.toString() +" "+ h.toString();
+        gif_on = !gif_on;
+        if(gif_on){Do_thing();}
     }
 
+    function Resize_gif()
+    {
+    obr.width = (window.innerWidth/8).toString();
+    obr.height = (window.innerHeight/8).toString();
+    }
 
+    function Do_thing()
+    {
+      	if(gif_on){ setTimeout(() => { obr.src = gifs[Math.floor(Math.random() * 10)] ;move(false);Reset_thing();}, 6000); }
+    }
 
-</script>
+   function Reset_thing()
+   {
+   	if(gif_on){ setTimeout(() => { move(true);Do_thing();}, 6000);}
+   }
 
+    function move(stealth)
+    {
+      endX = Math.floor(Math.random() * window.innerWidth) + 1;
+      endY = Math.floor(Math.random() * window.innerHeight) + 1;
+      Fun(endX, endY, stealth);
+    }
 
+    function Fun(endX, endY, laylow)
+    {
+        if(laylow){box.style.opacity = 0;} else{box.style.opacity = 1;}
+
+          box.style.transform = `translate(${endX}px, ${endY}px)`;
+          setTimeout(() => {box.style.opacity = 0;}, 5500);
+          return 0
+    }
+
+    </script>
+</div>
 </body>
 </html>
