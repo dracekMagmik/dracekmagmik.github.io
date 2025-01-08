@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagonal Animation with Fade</title>
+
+</head>
+<body>
+<div>
+    <p id="i"> I did this instead of learnin..</p>
+    <div style="position:relative;opacity:0;transition:transform 6s ease, opacity 0.5s ease;" id="box"><img id="obr1" src=""></div>
+
+    <button style="position:fixed;top:0px;right:0px;" onclick="But()">gif on/off</button>
+
+    <script>
+    const box = document.getElementById('box');
+    const obr = document.getElementById('obr1');
+    const gifs = ["https://media.tenor.com/NFy4TVG3DUcAAAAd/among-us-sus.gif", "https://media.tenor.com/L4DgAFBQTuoAAAAj/twerking-thanos.gif", "https://static.wikia.nocookie.net/cb254027-3aa5-4163-89fa-70dd4af25281", "https://media.tenor.com/L4DgAFBQTuoAAAAj/twerking-thanos.gif", "https://media1.tenor.com/m/PRK5G1k8WT8AAAAd/morbius-milo.gif", "https://i.kym-cdn.com/photos/images/original/001/268/278/b8c.gif", "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3U3Z25oa2I2bXRwZTdld2o5ZTA0dGkxYm8yMmozMzJ5NHd5dHlvNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bC0caT4xYU8qQ/giphy.webp" , "https://c.tenor.com/JV1IF9I1NvMAAAAd/tenor.gif", "https://www.icegif.com/wp-content/uploads/nyan-cat-icegif-22.gif", "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.icegif.com%2Fwp-content%2Fuploads%2F2023%2F07%2Ficegif-767.gif"];
+
+    let startX; let startY; let endX; let endY;
+    let gif_on = true;
+
+    Do_thing();
+
+    function But()
+    {
+        gif_on = !gif_on;
+        if(gif_on){Do_thing();}
+    }
+
+    function Resize_gif()
+    {
+    obr.width = (window.innerWidth/8).toString();
+    obr.height = (window.innerHeight/8).toString();
+    }
+
+    function Do_thing()
+    {
+      	if(gif_on){ setTimeout(() => { obr.src = gifs[Math.floor(Math.random() * 10)] ;move(false);Reset_thing();}, 6000); }
+    }
+
+   function Reset_thing()
+   {
+   	if(gif_on){ setTimeout(() => { move(true);Do_thing();}, 6000);}
+   }
+
+    function move(stealth)
+    {
+      endX = Math.floor(Math.random() * window.innerWidth) + 1;
+      endY = Math.floor(Math.random() * window.innerHeight) + 1;
+      Fun(endX, endY, stealth);
+    }
+
+    function Fun(endX, endY, laylow)
+    {
+        if(laylow){box.style.opacity = 0;} else{box.style.opacity = 1;}
+
+          box.style.transform = `translate(${endX}px, ${endY}px)`;
+          setTimeout(() => {box.style.opacity = 0;}, 5500);
+          return 0
+    }
+
+    </script>
+</div>
+</body>
+</html>
